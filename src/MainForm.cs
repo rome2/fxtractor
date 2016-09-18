@@ -369,7 +369,7 @@ namespace FXTractor
         return;
 
       // Show about informations:
-      MessageBox.Show("FXTractor v0.02\nCopyright 2009 Rolf Meyerhoff\nhttp://www.indygo.de", "About FXTractor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      MessageBox.Show("FXTractor v0.03\nCopyright 2009 Rolf Meyerhoff\nhttp://www.indygo.de", "About FXTractor", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     #endregion void menuItemAbout_Click(object, EventArgs)
 

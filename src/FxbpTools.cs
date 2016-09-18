@@ -201,8 +201,8 @@ namespace FXTractor
             // Read unknown value (no clue):
             UInt32 unknown4 = ReadUInt32(br, true);
 
-            // Check file size:
-            if (fileSize != (fileSize2 + file.Position + 4))
+            // Check file size (The other check is needed because Cubase tends to forget the items of this header:
+            if ((fileSize != (fileSize2 + file.Position + 4)) && (fileSize != (fileSize2 + file.Position - 16)))
               throw new Exception("Invalid file size: " + fileSize);
 
             // This is most likely a preset bank:
