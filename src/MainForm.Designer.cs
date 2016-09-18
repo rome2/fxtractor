@@ -87,10 +87,22 @@ namespace FXTractor
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       this.checkOverwrite = new System.Windows.Forms.CheckBox();
       this.checkXML = new System.Windows.Forms.CheckBox();
-      this.buttonAbout = new System.Windows.Forms.Button();
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       this.labelDrop = new System.Windows.Forms.Label();
       this.checkDry = new System.Windows.Forms.CheckBox();
+      this.menuStrip = new System.Windows.Forms.MenuStrip();
+      this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuItemConvertFiles = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuItemConvertDirectory = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuItemSeperator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
+      this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+      this.btnConvertFiles = new System.Windows.Forms.Button();
+      this.btnConvertDirectory = new System.Windows.Forms.Button();
+      this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+      this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+      this.menuStrip.SuspendLayout();
       this.SuspendLayout();
       // 
       // checkOverwrite
@@ -121,25 +133,11 @@ namespace FXTractor
       this.checkXML.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
       this.checkXML.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
       // 
-      // buttonAbout
-      // 
-      this.buttonAbout.AllowDrop = true;
-      this.buttonAbout.Location = new System.Drawing.Point(193, 162);
-      this.buttonAbout.Name = "buttonAbout";
-      this.buttonAbout.Size = new System.Drawing.Size(26, 23);
-      this.buttonAbout.TabIndex = 2;
-      this.buttonAbout.Text = "?";
-      this.toolTip.SetToolTip(this.buttonAbout, "Show informations about this application ");
-      this.buttonAbout.UseVisualStyleBackColor = true;
-      this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
-      this.buttonAbout.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
-      this.buttonAbout.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
-      // 
       // labelDrop
       // 
       this.labelDrop.AllowDrop = true;
       this.labelDrop.AutoSize = true;
-      this.labelDrop.Location = new System.Drawing.Point(53, 46);
+      this.labelDrop.Location = new System.Drawing.Point(63, 60);
       this.labelDrop.Name = "labelDrop";
       this.labelDrop.Size = new System.Drawing.Size(118, 26);
       this.labelDrop.TabIndex = 3;
@@ -161,19 +159,119 @@ namespace FXTractor
       this.checkDry.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
       this.checkDry.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
       // 
+      // menuStrip
+      // 
+      this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemFile,
+            this.menuItemHelp});
+      this.menuStrip.Location = new System.Drawing.Point(0, 0);
+      this.menuStrip.Name = "menuStrip";
+      this.menuStrip.Size = new System.Drawing.Size(245, 24);
+      this.menuStrip.TabIndex = 5;
+      this.menuStrip.Text = "menuStrip";
+      // 
+      // menuItemFile
+      // 
+      this.menuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemConvertFiles,
+            this.menuItemConvertDirectory,
+            this.menuItemSeperator1,
+            this.menuItemExit});
+      this.menuItemFile.Name = "menuItemFile";
+      this.menuItemFile.Size = new System.Drawing.Size(36, 20);
+      this.menuItemFile.Text = "&File";
+      // 
+      // menuItemConvertFiles
+      // 
+      this.menuItemConvertFiles.Image = ((System.Drawing.Image)(resources.GetObject("menuItemConvertFiles.Image")));
+      this.menuItemConvertFiles.Name = "menuItemConvertFiles";
+      this.menuItemConvertFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+      this.menuItemConvertFiles.Size = new System.Drawing.Size(216, 22);
+      this.menuItemConvertFiles.Text = "&Convert File(s)...";
+      this.menuItemConvertFiles.Click += new System.EventHandler(this.menuItemConvertFiles_Click);
+      // 
+      // menuItemConvertDirectory
+      // 
+      this.menuItemConvertDirectory.Image = ((System.Drawing.Image)(resources.GetObject("menuItemConvertDirectory.Image")));
+      this.menuItemConvertDirectory.Name = "menuItemConvertDirectory";
+      this.menuItemConvertDirectory.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+      this.menuItemConvertDirectory.Size = new System.Drawing.Size(216, 22);
+      this.menuItemConvertDirectory.Text = "Convert &Directory";
+      this.menuItemConvertDirectory.Click += new System.EventHandler(this.menuItemConvertDirectory_Click);
+      // 
+      // menuItemSeperator1
+      // 
+      this.menuItemSeperator1.Name = "menuItemSeperator1";
+      this.menuItemSeperator1.Size = new System.Drawing.Size(213, 6);
+      // 
+      // menuItemExit
+      // 
+      this.menuItemExit.Image = ((System.Drawing.Image)(resources.GetObject("menuItemExit.Image")));
+      this.menuItemExit.Name = "menuItemExit";
+      this.menuItemExit.Size = new System.Drawing.Size(216, 22);
+      this.menuItemExit.Text = "E&xit";
+      this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click);
+      // 
+      // menuItemHelp
+      // 
+      this.menuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAbout});
+      this.menuItemHelp.Name = "menuItemHelp";
+      this.menuItemHelp.Size = new System.Drawing.Size(43, 20);
+      this.menuItemHelp.Text = "&Help";
+      // 
+      // menuItemAbout
+      // 
+      this.menuItemAbout.Image = ((System.Drawing.Image)(resources.GetObject("menuItemAbout.Image")));
+      this.menuItemAbout.Name = "menuItemAbout";
+      this.menuItemAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+      this.menuItemAbout.Size = new System.Drawing.Size(166, 22);
+      this.menuItemAbout.Text = "&About...";
+      this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
+      // 
+      // btnConvertFiles
+      // 
+      this.btnConvertFiles.Location = new System.Drawing.Point(12, 198);
+      this.btnConvertFiles.Name = "btnConvertFiles";
+      this.btnConvertFiles.Size = new System.Drawing.Size(105, 23);
+      this.btnConvertFiles.TabIndex = 6;
+      this.btnConvertFiles.Text = "Convert File(s)";
+      this.btnConvertFiles.UseVisualStyleBackColor = true;
+      this.btnConvertFiles.Click += new System.EventHandler(this.menuItemConvertFiles_Click);
+      // 
+      // btnConvertDirectory
+      // 
+      this.btnConvertDirectory.Location = new System.Drawing.Point(123, 198);
+      this.btnConvertDirectory.Name = "btnConvertDirectory";
+      this.btnConvertDirectory.Size = new System.Drawing.Size(105, 23);
+      this.btnConvertDirectory.TabIndex = 7;
+      this.btnConvertDirectory.Text = "Convert Directory";
+      this.btnConvertDirectory.UseVisualStyleBackColor = true;
+      this.btnConvertDirectory.Click += new System.EventHandler(this.menuItemConvertDirectory_Click);
+      // 
+      // openFileDialog
+      // 
+      this.openFileDialog.DefaultExt = "vstpreset";
+      this.openFileDialog.Filter = "Vst3 Presets (*.vstpreset)|*.vstpreset";
+      this.openFileDialog.Multiselect = true;
+      this.openFileDialog.Title = "Select presets to convert";
+      // 
       // MainForm
       // 
       this.AllowDrop = true;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(231, 196);
+      this.ClientSize = new System.Drawing.Size(245, 236);
+      this.Controls.Add(this.btnConvertDirectory);
+      this.Controls.Add(this.btnConvertFiles);
       this.Controls.Add(this.checkDry);
       this.Controls.Add(this.labelDrop);
-      this.Controls.Add(this.buttonAbout);
       this.Controls.Add(this.checkXML);
       this.Controls.Add(this.checkOverwrite);
+      this.Controls.Add(this.menuStrip);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.MainMenuStrip = this.menuStrip;
       this.MaximizeBox = false;
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -181,6 +279,9 @@ namespace FXTractor
       this.TopMost = true;
       this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
       this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+      this.menuStrip.ResumeLayout(false);
+      this.menuStrip.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -189,12 +290,23 @@ namespace FXTractor
     private System.ComponentModel.IContainer components = null;
     private System.Windows.Forms.CheckBox checkOverwrite;
     private System.Windows.Forms.CheckBox checkXML;
-    private System.Windows.Forms.Button buttonAbout;
     private System.Windows.Forms.ToolTip toolTip;
     private System.Windows.Forms.Label labelDrop;
     private System.Windows.Forms.CheckBox checkDry;
 
     #endregion Windows form designer generated code
+    private System.Windows.Forms.MenuStrip menuStrip;
+    private System.Windows.Forms.ToolStripMenuItem menuItemFile;
+    private System.Windows.Forms.ToolStripMenuItem menuItemHelp;
+    private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
+    private System.Windows.Forms.ToolStripMenuItem menuItemConvertFiles;
+    private System.Windows.Forms.ToolStripMenuItem menuItemConvertDirectory;
+    private System.Windows.Forms.ToolStripSeparator menuItemSeperator1;
+    private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+    private System.Windows.Forms.Button btnConvertFiles;
+    private System.Windows.Forms.Button btnConvertDirectory;
+    private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+    private System.Windows.Forms.OpenFileDialog openFileDialog;
   }
   #endregion class MainForm
 }

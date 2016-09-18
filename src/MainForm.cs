@@ -217,9 +217,9 @@ namespace FXTractor
     }
     #endregion void MainForm_DragDrop(object, DragEventArgs)
 
-    #region void buttonAbout_Click(object, EventArgs)
+    #region void MainForm_FormClosing(object, FormClosingEventArgs)
     /// <summary>
-    /// Event handler for the about button click event.
+    /// Event handler for the FormClosing event.
     /// </summary>
     /// <param name="sender">
     /// The source control, emitting the event.
@@ -227,16 +227,151 @@ namespace FXTractor
     /// <param name="e">
     /// Event arguments describing the circumstances of the event.
     /// </param>
-    private void buttonAbout_Click(object sender, EventArgs e)
+    private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+      // Still running?
+      if ((processThread != null) && processThread.IsAlive)
+      {
+        // Stop closing:
+        e.Cancel = true;
+        return;
+      }
+
+      // Closing is fine:
+      e.Cancel = false;
+    }
+    #endregion void MainForm_FormClosing(object, FormClosingEventArgs)
+
+    #region void menuItemConvertFiles_Click(object, EventArgs)
+    /// <summary>
+    /// Event handler for the convert file(s) menu or button event.
+    /// </summary>
+    /// <param name="sender">
+    /// The source control, emitting the event.
+    /// </param>
+    /// <param name="e">
+    /// Event arguments describing the circumstances of the event.
+    /// </param>
+    private void menuItemConvertFiles_Click(object sender, EventArgs e)
+    {
+      // Already running?
+      if ((processThread != null) && processThread.IsAlive)
+        return;
+
+      try
+      {
+        // Get file(s):
+        if (openFileDialog.ShowDialog() != DialogResult.OK)
+          return;
+
+        // Anything to do?
+        if (openFileDialog.FileNames != null)
+        {
+          // Add files to the file list:
+          processFiles = new StringCollection();
+          processFiles.AddRange(openFileDialog.FileNames);
+
+          // Create a working thread and delegate the hard work to this thread:
+          processThread = new Thread((ThreadStart)delegate() { Invoke((MethodInvoker)delegate() { ProcessFunc(); }); });
+          processThread.Start();
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+        return;
+      }
+    }
+    #endregion void menuItemConvertFiles_Click(object, EventArgs)
+
+    #region void menuItemConvertDirectory_Click(object, EventArgs)
+    /// <summary>
+    /// Event handler for the convert directory menu or button event.
+    /// </summary>
+    /// <param name="sender">
+    /// The source control, emitting the event.
+    /// </param>
+    /// <param name="e">
+    /// Event arguments describing the circumstances of the event.
+    /// </param>
+    private void menuItemConvertDirectory_Click(object sender, EventArgs e)
+    {
+      // Already running?
+      if ((processThread != null) && processThread.IsAlive)
+        return;
+
+      try
+      {
+        // Get directory:
+        if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+          return;
+
+        // Is a directory?
+        if (Directory.Exists(folderBrowserDialog.SelectedPath))
+        {
+          // Search for files:
+          string[] newFiles = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.vstpreset", SearchOption.AllDirectories);
+          if (newFiles != null)
+          {
+            // Add files to the file list:
+            processFiles = new StringCollection();
+            processFiles.AddRange(newFiles);
+
+            // Create a working thread and delegate the hard work to this thread:
+            processThread = new Thread((ThreadStart)delegate() { Invoke((MethodInvoker)delegate() { ProcessFunc(); }); });
+            processThread.Start();
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+        return;
+      }
+    }
+    #endregion void menuItemConvertDirectory_Click(object, EventArgs)
+
+    #region void menuItemExit_Click(object, EventArgs)
+    /// <summary>
+    /// Event handler for the exit menu event.
+    /// </summary>
+    /// <param name="sender">
+    /// The source control, emitting the event.
+    /// </param>
+    /// <param name="e">
+    /// Event arguments describing the circumstances of the event.
+    /// </param>
+    private void menuItemExit_Click(object sender, EventArgs e)
+    {
+      // Still running?
+      if ((processThread != null) && processThread.IsAlive)
+        return;
+
+      // Close the application:
+      this.Close();
+    }
+    #endregion void menuItemExit_Click(object, EventArgs)
+
+    #region void menuItemAbout_Click(object, EventArgs)
+    /// <summary>
+    /// Event handler for the about menu entry event.
+    /// </summary>
+    /// <param name="sender">
+    /// The source control, emitting the event.
+    /// </param>
+    /// <param name="e">
+    /// Event arguments describing the circumstances of the event.
+    /// </param>
+    private void menuItemAbout_Click(object sender, EventArgs e)
     {
       // Currently running?
       if ((processThread != null) && processThread.IsAlive)
         return;
 
       // Show about informations:
-      MessageBox.Show("FXTractor v0.01\nCopyright 2009 Rolf Meyerhoff\nhttp://www.indygo.de", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      MessageBox.Show("FXTractor v0.02\nCopyright 2009 Rolf Meyerhoff\nhttp://www.indygo.de", "About FXTractor", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
-    #endregion void buttonAbout_Click(object, EventArgs)
+    #endregion void menuItemAbout_Click(object, EventArgs)
 
     #endregion Event Handler
   }
