@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fxtractor by rome2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Fxtractor</h1>
+      <h2 class="project-tagline">Vstpreset to FXB/FXP converter</h2>
+      <a href="https://github.com/rome2/fxtractor" class="btn">View on GitHub</a>
+      <a href="https://github.com/rome2/fxtractor/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/rome2/fxtractor/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>fxtractor is a small helper tool for users of the music software products from Steinberg. It allows conversion and interchange of old and new effect- and synth-preset formats.</p>
+
+<h2>
+<a id="history" class="anchor" href="#history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>History</h2>
+
+<p>With the introduction of the Media Bay in Cubase4 and Nuendo4 Steinberg decided to drop support for the old but well established FXB and FXP preset data file formats. While import of plugin presets is still supported (at least one by one) exporting has been removed completely. This was a major annoyance for many people as the lack of FXP and FXB support makes plugin preset exchange with users of other DAWs virtually impossible and backup of presets a PITA. After a very long thread in the german part of the old Steinberg user forum the idea for this small tool was born.</p>
+
+<h2>
+<a id="what-does-it-do" class="anchor" href="#what-does-it-do" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What does it do?</h2>
+
+<p>Basically FXTractor is a small tool to convert new Vst3 VSTPRESET files to old style Vst2 FXP and FXB files (if possible). Please remember: This tool is totally unsupported from Steinberg. It is a user contribution to the Cubase community written to help other users.</p>
+
+<h2>
+<a id="status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
+
+<p>This software works pretty well in it's current state but it is still under constant development. So please don't expect it to work perfectly out of the box all of the time. If you find a vstprest that doesn't work then create a bug report (see 'issue' above) and attach the file along with a description of the host and plugin used and we'll have look at it.</p>
+
+<h1>
+<a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How does it work?</h1>
+
+<p>It is very simple. The application will open a small window that will stay on top of above all other windows on your system. Just drag the files you want to convert from the explorer/finder into the window and the magic will do the rest. At the end of the process you'll find the resulting file(s) side by side to the original vstpreset files. To convert the contents of a complete directory just drop the folder on the window. All preset files inside the folder will be converted automatically.</p>
+
+<p>Of course you may use the buttons and menu entries to manually select the items to process.</p>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options:</h2>
+
+<p><strong>Overwrite existing files:</strong> Checking this option will cause the tool to overwrite previously existing files.</p>
+
+<p><strong>Extract XML data:</strong> Checking this will extract the XML Media Bay data along with the binary preset data. The XML data is not of much real world value but it may be interesting to look at.</p>
+
+<p><strong>Dry run (don't write anything):</strong> If this option is checked the tool will operate in Read-Only-Mode.</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>This application currently has no installer. To start this tool just unzip the package and start the included FXTractor.exe file. MacOS and Linux users may need to open a terminal and start the application with "mono FXTractor.exe".</p>
+
+<h1>
+<a id="building-the-application-from-source" class="anchor" href="#building-the-application-from-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building the Application From Source</h1>
+
+<p>The application doesn't need fancy controls or bleeding edge technologies. To build the source you'll just need Microsoft Visual Studio 2005 or later. I have not tested it but the express editions should work just fine.</p>
+
+<p>The project only references plain .NET 2.0 assemblies. These are included in the Visual Studio distribution so it should be sufficient to load the csproj file and build the application.</p>
+
+<h1>
+<a id="system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h1>
+
+<p>This tool was written with C# and the .Net framework so it should run on all platforms supported by the Microsoft .Net Framework or the free alternative provided by the Mono project.</p>
+
+<p><strong>Windows:</strong> Windows Vista and Windows 7 should have the .Net framework files installed by default. Windows 2000 and Windows XP users may need to download a current version of the framework frome the Microsoft website.</p>
+
+<p><strong>MacOS, Linux, BSD etc:</strong> This is not tested yet but the tools should theoretically run fine with Mono, the free implementation provided by the Mono Project on MacOS, Linux and other supported platforms. Most modern Linux distributions already install the mono framework by default. MacOS users may need to download a recent version from the Mono-website (here).</p>
+
+<h1>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h1>
+
+<p>Here is the place for frequently asked questions.</p>
+
+<h2>
+<a id="where-does-cubase-45-store-the-presets" class="anchor" href="#where-does-cubase-45-store-the-presets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Where does Cubase 4/5 store the presets?</h2>
+
+<p>Cubase will store the presets on different places depending on your operating system.</p>
+
+<p><strong>Windows XP:</strong></p>
+
+<p>C:/Documents and Settings/USERNAME/Application Data/VST3 Presets/PLUGIN_VENDOR/PLUGIN_NAME/</p>
+
+<p><strong>Windows Vista and later:</strong></p>
+
+<p>C:/Users/USERNAME/AppData?/Roaming/VST3 Presets/PLUGIN_VENDOR/PLUGIN_NAME/</p>
+
+<p>USERNAME is the name of your current user account, eg Joe or Horst. PLUGIN_VENDOR is the vendor name of the plugin, eg Waldorf or Steinberg Media Technologies PLUGIN_NAME is the name of the plugin, eg A1 or Magneto. The preset will be stored as PRESET_NAME.vstpreset where PRESET_NAME is the name you entered in the save preset dialog box.</p>
+
+<p>You may have to enable the 'show hidden files' preference in the Windows Explorer folder options to make these folders visible.</p>
+
+<p>As this wasn't confusing enough Steinberg decided to add a VST3 Preset folder under My Documents as well (starting with Cubase 5.5).</p>
+
+<h1>
+<a id="version-history" class="anchor" href="#version-history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Version History</h1>
+
+<h2>
+<a id="09182016" class="anchor" href="#09182016" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>09/18/2016</h2>
+
+<p>Moved to GitHub.</p>
+
+<h2>
+<a id="03142015" class="anchor" href="#03142015" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>03/14/2015</h2>
+
+<p>Moved away from Google Project Hosting.</p>
+
+<h2>
+<a id="12062010---v003" class="anchor" href="#12062010---v003" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>12/06/2010 - v0.03</h2>
+
+<p>Migrated to Google Project Hosting.</p>
+
+<h2>
+<a id="10242009---v003" class="anchor" href="#10242009---v003" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>10/24/2009 - v0.03</h2>
+
+<p>Fixed some glitches if the 'Save Preset' function was used in Cubase to create the presets.</p>
+
+<h2>
+<a id="10082009---v002" class="anchor" href="#10082009---v002" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>10/08/2009 - v0.02</h2>
+
+<p>Added buttons and menues for better screen reader support (thanks to Jinseng for pointing this out).</p>
+
+<h2>
+<a id="03192009---v001" class="anchor" href="#03192009---v001" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>03/19/2009 - v0.01</h2>
+
+<p>Initial release.</p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>Copyright (c) 2010, Rolf Meyerhoff</p>
+
+<p>All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</p></li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</p></li>
+<li><p>Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</p></li>
+</ol>
+
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+<h1>
+<a id="downloads" class="anchor" href="#downloads" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Downloads</h1>
+
+<p>Version 0.03 (Dec 2010)
+Version 0.02 (Dec 2010)
+Version 0.01 (Dec 2010)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/rome2/fxtractor">Fxtractor</a> is maintained by <a href="https://github.com/rome2">rome2</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
